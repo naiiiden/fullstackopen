@@ -1,11 +1,16 @@
 import Content from "./Content";
 import Header from "./Header";
 
-const Course = ({ course }) => {
+const Course = ({ courses }) => {
     return (
         <div>
-            <Header course={course.name}/>
-            <Content course={course}/>
+            {courses.map(course => {
+                return (
+                    <Header key={course.id} course={course.name}/>
+                )
+            })}
+            {/* <Header course={courses[0].name}/> */}
+            <Content course={courses}/>
         </div>
     )
 }
