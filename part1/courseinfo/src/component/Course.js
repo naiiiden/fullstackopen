@@ -1,14 +1,11 @@
+import Content from "./Content";
 import Header from "./Header";
-import Part from "./Part";
 
 const Course = ({ course }) => {
     return (
         <div>
             <Header course={course.name}/>
-            <p>hey</p>
-            <Part courseName={course.parts[0].name} courseExercises={course.parts[0].exercises}/>
-            <Part courseName={course.parts[1].name} courseExercises={course.parts[1].exercises}/>
-            <Part courseName={course.parts[2].name} courseExercises={course.parts[2].exercises}/>
+            <Content course={course}/>
         </div>
     )
 }
