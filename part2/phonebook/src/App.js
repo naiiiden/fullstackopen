@@ -6,43 +6,44 @@ const App = () => {
       number: '040-1234567', 
     }
   ]);
-  const [newName, setNewName] = useState('a new name');
-  const [newNumber, setNewNumber] = useState('a new number');
 
-  const addName = (e) => {
+  const [newPerson, setNewPerson] = useState({
+    name: 'a new name',
+    number: 'a new number',
+  });
+
+  const addPerson = (e) => {
     e.preventDefault();
-    console.log('btn click', e.target);
+    
     const personObj = {
-      name: newName,
-      number: newNumber,
+      name: newPerson.name,
+      number: newPerson.number,
     }
+    
     const sameName = persons.find((person) => person.name === personObj.name);
     if (!sameName) {
       setPersons(persons.concat(personObj));
-      setNewName('');
     } else {
-      alert(`${newName} is already added to phonebook`);
-      setNewName('');
+      alert(`${personObj.name} is already added to phonebook`);
     }
-
-  }
-
-  const handleNameChange = (e) => {
-    setNewName(e.target.value);
-  }
-
-  const handleNumberChange = (e) => {
-    setNewNumber(e.target.value);
   }
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addName}>
+      <form onSubmit={addPerson}>
         <div>
-          name: <input value={newName} onChange={handleNameChange}/>
+          name: 
+          <input 
+            value={newPerson.name} 
+            onChange={(e) => setNewPerson({name: e.target.value, number: newPerson.number})}
+          />
           <br/>
-          phone: <input value={newNumber} onChange={handleNumberChange}/>
+          phone: 
+          <input 
+            value={newPerson.number} 
+            onChange={(e) => setNewPerson({name: newPerson.name, number: e.target.value})}
+          />
         </div>
         <div>
           <button type="submit">add</button>
