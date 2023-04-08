@@ -20,11 +20,11 @@ const App = () => {
       number: newPerson.number,
     }
     
-    const sameName = persons.find((person) => person.name === personObj.name);
-    if (!sameName) {
+    const sameNumber = persons.find((person) => person.number === personObj.number);
+    if (!sameNumber) {
       setPersons(persons.concat(personObj));
     } else {
-      alert(`${personObj.name} is already added to phonebook`);
+      alert(`Person with number ${personObj.number} is already added to phonebook`);
     }
   }
 
@@ -35,13 +35,13 @@ const App = () => {
         <div>
           name: 
           <input 
-            value={newPerson.name} 
+            placeholder={newPerson.name} 
             onChange={(e) => setNewPerson({name: e.target.value, number: newPerson.number})}
           />
           <br/>
           phone: 
           <input 
-            value={newPerson.number} 
+            placeholder={newPerson.number} 
             onChange={(e) => setNewPerson({name: newPerson.name, number: e.target.value})}
           />
         </div>
@@ -51,7 +51,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {persons.map(person => <li key={person.name}>{person.name} - {person.number}</li>)}
+        {persons.map(person => <li key={person.number}>{person.name} - {person.number}</li>)}
       </ul>
     </div>
   )
