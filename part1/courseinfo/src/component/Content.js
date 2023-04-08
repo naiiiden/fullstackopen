@@ -1,8 +1,7 @@
 import Part from "./Part";
+import Total from "./Total";
 
 const Content = ({ parts }) => {
-    console.log('parts:', parts);
-
     const total = parts.reduce((sum, part) => {
         return sum + part.exercises;
     }, 0);
@@ -14,7 +13,7 @@ const Content = ({ parts }) => {
                     <Part key={part.id} courseName={part.name} courseExercises={part.exercises}/>
                 )
             })}
-            <p><strong>total of exercises {total}</strong></p>
+            <Total exercises={total}/>
         </div>
     )
 }

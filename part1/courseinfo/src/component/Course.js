@@ -5,7 +5,6 @@ const Course = ({ courses }) => {
     return (
         <div>
             {courses.map(course => {
-
                 return (
                     <div>
                         <Header key={course.id} course={course.name}/>
