@@ -5,9 +5,8 @@ const App = () => {
     { name: 'Arto Hellas' }
   ]);
   const [newName, setNewName] = useState('a new name');
-  // const [showAll, setShowAll] = useState(true);
 
-  const addNote = (e) => {
+  const addName = (e) => {
     e.preventDefault();
     console.log('btn click', e.target);
     const nameObj = {
@@ -20,13 +19,11 @@ const App = () => {
   const handleNameChange = (e) => {
     setNewName(e.target.value);
   }
-
-  console.log(2, persons);
-
+  
   return (
     <div>
       <h2>Phonebook</h2>
-      <form onSubmit={addNote}>
+      <form onSubmit={addName}>
         <div>
           name: <input value={newName} onChange={handleNameChange}/>
         </div>
@@ -35,7 +32,9 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-
+      <ul>
+        {persons.map(person => <li key={person.name}>{person.name}</li>)}
+      </ul>
     </div>
   )
 }
