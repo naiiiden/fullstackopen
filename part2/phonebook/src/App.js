@@ -30,9 +30,17 @@ const App = () => {
     }
   }
 
+  const filterPerson = (e) => {
+    console.log(
+      persons.filter((person) => person.name.toLowerCase().includes(e.target.value.toLowerCase()))
+    )
+  }
+
   return (
     <div>
-      <h2>Phonebook</h2>
+      <h1>Phonebook</h1>
+      filter shown with <input onChange={filterPerson}/>
+      <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
           name: 
