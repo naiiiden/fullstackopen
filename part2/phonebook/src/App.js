@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import PersonItem from './components/PersonItem';
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -63,7 +64,7 @@ const App = () => {
       </form>
       <h2>Numbers</h2>
       <ul>
-        {personsFiltered.map(person => <li key={person.number}>{person.name} - {person.number}, ID: {person.id}</li>)}
+        {personsFiltered.map(person => <PersonItem key={person.number} name={person.name} number={person.number} id={person.id}/>)}
       </ul>
     </div>
   )
