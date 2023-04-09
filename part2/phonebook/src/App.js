@@ -12,8 +12,8 @@ const App = () => {
   const [filter, setFilter] = useState('');
 
   const [newPerson, setNewPerson] = useState({
-    name: 'a new name',
-    number: 'a new number',
+    name: '',
+    number: '',
   });
 
   const addPerson = (e) => {
@@ -26,10 +26,12 @@ const App = () => {
     }
     
     const sameNumber = persons.find((person) => person.number === personObj.number);
-    if (!sameNumber) {
+    if (newPerson.name !== '' && newPerson.number !== '' && !sameNumber) {
       setPersons(persons.concat(personObj));
     } else {
-      alert(`Person with number ${personObj.number} is already added to phonebook`);
+      newPerson.number 
+      ? alert(`Person with number ${personObj.number} is already added to phonebook`)
+      : alert(`Please add a name and number`)
     }
   }
 
