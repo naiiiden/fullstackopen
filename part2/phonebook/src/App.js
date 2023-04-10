@@ -29,6 +29,7 @@ const App = () => {
     const personObj = {
       name: newPerson.name,
       number: newPerson.number,
+      id: persons.length + 1,
     }
     
     const sameNumber = persons.find((person) => person.number === personObj.number);
