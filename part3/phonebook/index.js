@@ -1,5 +1,6 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 let persons = [
     { 
@@ -26,6 +27,32 @@ let persons = [
 
 app.get('/api/persons', (req, res) => {
     res.send(persons);
+});
+
+const generateId = () => {
+  const maxId = persons.length > 0
+      ? Math.max(...persons.map(n => n.id))
+      : 0
+  return maxId + 1;
+}
+
+app.post('/api/persons', (req, res) => {
+  const body = req.body;
+
+  if (!body.name) {
+    return res.status(404).json({
+      error: 'contact must have a name and a body'
+    });
+  }
+
+  const person = {
+    "id": generateId(),
+    "name": body.name,
+    "number": body.number,
+  }
+
+  persons = persons.concat(person);
+  res.json(person);
 });
 
 app.get('/api/persons/:id', (req, res) => {
