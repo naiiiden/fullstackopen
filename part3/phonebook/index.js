@@ -28,6 +28,17 @@ app.get('/api/persons', (req, res) => {
     res.send(persons);
 });
 
+app.get('/api/persons/:id', (req, res) => {
+  const id = Number(req.params.id);
+  console.log(id);
+  const person = persons.find(person => person.id === id);
+  if (person) {
+    res.json(person);
+  } else {
+    res.status(404).end(`person with ${id} does not exist`);
+  }
+});
+
 app.get('/info', (req, res) => {
   res.send(`<div>Phonebook has info for ${persons.length} people <br/>${new Date()}</div>`);
 });
