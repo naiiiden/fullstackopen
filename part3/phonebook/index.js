@@ -39,9 +39,9 @@ const generateId = () => {
 app.post('/api/persons', (req, res) => {
   const body = req.body;
 
-  if (!body.name) {
+  if (!body.name || !body.number) {
     return res.status(404).json({
-      error: 'contact must have a name and a body'
+      error: 'name or number is missing'
     });
   }
 
