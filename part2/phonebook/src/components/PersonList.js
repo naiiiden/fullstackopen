@@ -5,7 +5,7 @@ const PersonList = ({ arrayToMap, deletePersonById }) => {
         <ol>
             {arrayToMap.map(person => 
                 <PersonItem 
-                    deletePersonById={() => deletePersonById(person.id)} 
+                    deletePersonById={() => deletePersonById(person.id, person.name, person.number)} 
                     key={person.id} 
                     name={person.name} 
                     number={person.number}

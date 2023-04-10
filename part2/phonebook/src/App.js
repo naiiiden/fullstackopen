@@ -54,8 +54,10 @@ const App = () => {
   
   const personsFiltered = persons.filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
 
-  const deletePersonById = (id) => {
-    console.log(`person with ${id} is deleted`);
+  const deletePersonById = (id, name, number) => {
+    if (window.confirm(`delete person with: \nname: ${name}\nnumber: ${number}\nID: ${id}?`)) {
+      console.log(`person: ${name} ${id} is deleted`);
+    }
   }
 
   return (
