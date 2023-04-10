@@ -1,19 +1,54 @@
 {
-    "notes": [
-      {
-        "id": 1,
-        "content": "HTML is easy",
-        "important": true
-      },
-      {
-        "id": 2,
-        "content": "Browser can execute only JavaScript",
-        "important": false
-      },
-      {
-        "id": 3,
-        "content": "GET and POST are the most important methods of HTTP protocol",
-        "important": true
-      }
-    ]
+  "notes": [
+    {
+      "id": 1,
+      "content": "HTML is easy",
+      "important": false
+    },
+    {
+      "id": 2,
+      "content": "Browser can execute only JavaScript",
+      "important": false
+    },
+    {
+      "id": 3,
+      "content": "GET and POST are the most important methods of HTTP protocol",
+      "important": true
+    },
+    {
+      "content": "I love CSS",
+      "important": true,
+      "id": 4
+    },
+    {
+      "content": "I don't love JavaScript as much as I love CSS",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "Axios vs Fetch",
+      "important": true,
+      "id": 6
+    },
+    {
+      "content": "React or Svelte",
+      "important": false,
+      "id": 7
+    },
+    {
+      "content": "a new note...",
+      "important": false,
+      "id": 8
+    },
+    {
+      "content": "heey",
+      "important": false,
+      "id": 9
+    },
+    {
+      "content": "hey hey hey",
+      "important": true,
+      "id": 10
+    }
+  ]
 }

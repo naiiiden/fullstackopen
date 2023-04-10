@@ -29,12 +29,16 @@ const App = () => {
     const personObj = {
       name: newPerson.name,
       number: newPerson.number,
-      id: persons.length + 1,
     }
     
     const sameNumber = persons.find((person) => person.number === personObj.number);
     if (newPerson.name !== '' && newPerson.number !== '' && !sameNumber) {
       setPersons(persons.concat(personObj));
+      axios
+        .post('http://localhost:3001/persons', personObj)
+          .then(response => {
+            console.log(response);
+          })
     } else {
       newPerson.number 
       ? alert(`Person with number ${personObj.number} is already added to phonebook`)

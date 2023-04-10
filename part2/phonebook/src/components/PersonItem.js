@@ -1,6 +1,6 @@
-const PersonItem = ({ name, number, id }) => {
+const PersonItem = ({ name, number }) => {
     return (
-        <li key={number}>{name} - {number}, ID: {id}</li>
+        <li key={number}>{name} - {number}</li>
     )
 }
 
