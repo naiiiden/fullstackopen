@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import personService from './services/persons';
 import PersonList from './components/PersonList';
 
@@ -57,6 +56,14 @@ const App = () => {
   const deletePersonById = (id, name, number) => {
     if (window.confirm(`delete person with: \nname: ${name}\nnumber: ${number}\nID: ${id}?`)) {
       console.log(`person: ${name} ${id} is deleted`);
+      personService
+        .deletePerson(id)
+        .then(response => {
+          console.log('delete', response.data);
+          setPersons(persons.filter((person) => {
+            return person.id !== id;
+          }));
+        })
     }
   }
 

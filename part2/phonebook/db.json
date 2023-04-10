@@ -2,7 +2,7 @@
   "persons": [
     {
       "name": "Arto Hellas",
-      "number": "040-1234567",
+      "number": "040-123456",
       "id": 1
     },
     {
@@ -21,24 +21,14 @@
       "id": 4
     },
     {
-      "name": "Nano Radnev",
-      "number": "55-55-882979",
-      "id": 5
-    },
-    {
       "name": "very cool guy",
       "number": "555879297092",
-      "id": 6
+      "id": 5
     },
     {
       "name": "smart guy",
       "number": "0670-555555",
-      "id": 7
-    },
-    {
-      "name": "average cool guy",
-      "number": "00512789",
-      "id": 8
+      "id": 6
     }
   ]
 }
