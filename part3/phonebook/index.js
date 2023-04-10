@@ -28,6 +28,10 @@ app.get('/api/persons', (req, res) => {
     res.send(persons);
 });
 
+app.get('/info', (req, res) => {
+  res.send(`<div>Phonebook has info for ${persons.length} people <br/>${new Date()}</div>`);
+});
+
 app.listen(3001, () => {
     console.log(`server running on port 3001`);
 });
