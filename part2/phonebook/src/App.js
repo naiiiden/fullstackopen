@@ -54,6 +54,10 @@ const App = () => {
   
   const personsFiltered = persons.filter((person) => person.name.toLowerCase().includes(filter.toLowerCase()))
 
+  const deletePersonById = (id) => {
+    console.log(`person with ${id} is deleted`);
+  }
+
   return (
     <div>
       <h1>Phonebook</h1>
@@ -78,7 +82,10 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <PersonList arrayToMap={personsFiltered}/>
+      <PersonList 
+        arrayToMap={personsFiltered} 
+        deletePersonById={deletePersonById}
+      />
     </div>
   )
 }

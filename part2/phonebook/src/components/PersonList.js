@@ -1,9 +1,16 @@
 import PersonItem from "./PersonItem";
 
-const PersonList = ({ arrayToMap }) => {
+const PersonList = ({ arrayToMap, deletePersonById }) => {
     return (
         <ol>
-            {arrayToMap.map(person => <PersonItem key={person.number} name={person.name} number={person.number}/>)}
+            {arrayToMap.map(person => 
+                <PersonItem 
+                    deletePersonById={() => deletePersonById(person.id)} 
+                    key={person.id} 
+                    name={person.name} 
+                    number={person.number}
+                />)
+            }
         </ol>
     )
 }
