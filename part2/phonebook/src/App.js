@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import personService from './services/persons';
 import PersonList from './components/PersonList';
 
 const App = () => {
@@ -12,16 +13,13 @@ const App = () => {
     number: '',
   });
 
-  const hook = () => {
-    axios
-      .get('http://localhost:3001/persons')
+  useEffect(() => {
+    personService
+      .getAll()
       .then(response => {
-        console.log(response);
-        setPersons(response.data);
-      });
-  }
-
-  useEffect(hook, []);
+        setPersons(response.data)
+      })
+  }, []);
 
   const addPerson = (e) => {
     e.preventDefault();
@@ -34,11 +32,15 @@ const App = () => {
     const sameNumber = persons.find((person) => person.number === personObj.number);
     if (newPerson.name !== '' && newPerson.number !== '' && !sameNumber) {
       setPersons(persons.concat(personObj));
-      axios
-        .post('http://localhost:3001/persons', personObj)
-          .then(response => {
-            console.log(response);
-          })
+      personService
+        .create(personObj)
+        .then(response => {
+          console.log(response.data);
+          setNewPerson({
+            name: '',
+            number: '',
+          });
+        })
     } else {
       newPerson.number 
       ? alert(`Person with number ${personObj.number} is already added to phonebook`)
