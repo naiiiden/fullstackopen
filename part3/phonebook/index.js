@@ -3,7 +3,12 @@ const app = express();
 const morgan = require('morgan');
 app.use(express.json());
 
-app.use(morgan('tiny'));
+morgan.token('body', req => {
+  return JSON.stringify(req.body);
+  // https://stackoverflow.com/questions/67496399/how-to-get-the-request-body-in-morgan-middleware
+});
+
+app.use(morgan(':method :url :body'));
 
 let persons = [
     { 
