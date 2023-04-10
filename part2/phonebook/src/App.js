@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import personService from './services/persons';
 import PersonList from './components/PersonList';
+import Notification from './components/Notification';
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -11,6 +12,8 @@ const App = () => {
     name: '',
     number: '',
   });
+
+  const [notificationMessage, setNotificationMessage] = useState(null);
 
   useEffect(() => {
     personService
@@ -39,6 +42,10 @@ const App = () => {
             name: '',
             number: '',
           });
+          setNotificationMessage(`added ${newPerson.name}`);
+          setTimeout(() => {
+            setNotificationMessage(null);
+          }, 3000);
         })
     } else {
       newPerson.number 
@@ -70,6 +77,7 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={notificationMessage}/>
       filter shown with <input onChange={handleFilterPerson}/>
       <h2>add a new</h2>
       <form onSubmit={addPerson}>
