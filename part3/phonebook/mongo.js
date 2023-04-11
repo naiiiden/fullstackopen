@@ -21,11 +21,11 @@ const phoneSchema = new mongoose.Schema({
 const Phone = mongoose.model('Phone', phoneSchema)
 
 const phone = new Phone({
-    name: "Nano",
-    number: "555-333-111",
+    name: process.argv[3],
+    number: process.argv[4],
 });
 
 phone.save().then(result => {
-  console.log('phone saved!')
-  mongoose.connection.close()
+    console.log(`added ${result.name} with number ${result.number} to phonebook`);
+    mongoose.connection.close()
 })
