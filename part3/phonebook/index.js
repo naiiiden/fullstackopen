@@ -63,29 +63,44 @@ const generateId = () => {
 }
 
 app.post('/api/persons', (req, res) => {
+  // const body = req.body;
+
+  // if (!body.name || !body.number) {
+  //   return res.status(404).json({
+  //     error: 'name or number is missing'
+  //   });
+  // }
+
+  // if(persons.find((person) => person.number === body.number)) {
+  //   return res.status(404).json({
+  //     error: 'that number already exists in phonebook'
+  //   });
+  // }
+
+
+  // const person = {
+  //   "id": generateId(),
+  //   "name": body.name,
+  //   "number": body.number,
+  // }
+
+  // persons = persons.concat(person);
+  // res.json(person);
+
   const body = req.body;
+    
+    if (body.number === undefined) {
+        return res.status(404).json({ error: 'please add a number' });
+    }
 
-  if (!body.name || !body.number) {
-    return res.status(404).json({
-      error: 'name or number is missing'
-    });
-  }
+    const phone = new Phone({
+        "name": body.name,
+        "number": body.number,
+    })
 
-  if(persons.find((person) => person.number === body.number)) {
-    return res.status(404).json({
-      error: 'that number already exists in phonebook'
-    });
-  }
-
-
-  const person = {
-    "id": generateId(),
-    "name": body.name,
-    "number": body.number,
-  }
-
-  persons = persons.concat(person);
-  res.json(person);
+    phone.save().then(savedPhone => {
+        res.json(savedPhone);
+    })
 });
 
 app.get('/api/persons/:id', (req, res) => {
