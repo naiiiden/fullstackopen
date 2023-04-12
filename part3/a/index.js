@@ -6,24 +6,6 @@ app.use(cors());
 require('dotenv').config();
 const Note = require('./models/note');
 
-// let notes = [
-//     {
-//       id: 1,
-//       content: "HTML is easy",
-//       important: true
-//     },
-//     {
-//       id: 2,
-//       content: "Browser can execute only JavaScript",
-//       important: false
-//     },
-//     {
-//       id: 3,
-//       content: "GET and POST are the most important methods of HTTP protocol",
-//       important: true
-//     }
-// ]
-
 app.get('/', (req, res) => {
     res.send('<h1>hello world</h1>');
 });
@@ -34,13 +16,6 @@ app.get('/api/notes', (req, res) => {
             res.json(notes);
         });
 });
-
-const generateId = () => {
-    const maxId = notes.length > 0
-        ? Math.max(...notes.map(n => n.id))
-        : 0
-    return maxId + 1;
-}
 
 app.post('/api/notes', (req, res) => {
     const body = req.body;
@@ -59,17 +34,39 @@ app.post('/api/notes', (req, res) => {
     })
 });
 
-app.get('/api/notes/:id', (req, res) => {
+app.get('/api/notes/:id', (req, res, next) => {
     Note.findById(req.params.id)
-    .then(note => {
-        res.json(note);
-    })
+        .then(note => {
+            if (note) {
+                res.json(note);
+            } else {
+                res.status(404).end();
+            }
+        })
+        .catch(err => next(err))
 });
 
-app.delete('/api/notes/:id', (req, res) => {
-    const id = Number(req.params.id);
-    notes = notes.filter(note => note.id !== id);
-    res.status(204).end();
+app.delete('/api/notes/:id', (req, res, next) => {
+    Note.findByIdAndDelete(req.params.id)
+        .then(result => {
+            res.status(204).end();
+        })
+        .catch(err => next(err));
+});
+
+app.put('/api/notes/:id', (req, res, next) => {
+    const body = req.body;
+
+    const note = {
+        content: body.content,
+        important: body.important,
+    }
+
+    Note.findByIdAndUpdate(req.params.id, note, { new: true })
+        .then(updatedNote => {
+            res.json(updatedNote);
+        })
+        .catch(err => next(err));
 });
 
 const PORT = process.env.PORT;
