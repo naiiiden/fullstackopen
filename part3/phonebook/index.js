@@ -3,6 +3,22 @@ const app = express();
 const morgan = require('morgan');
 app.use(express.json());
 
+const mongoose = require('mongoose')
+
+// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+const url =
+  `mongodb+srv://fullstack:fso@cluster0.6gnwje6.mongodb.net/phonebookApp?retryWrites=true&w=majority`
+
+mongoose.set('strictQuery',false)
+mongoose.connect(url)
+
+const phoneSchema = new mongoose.Schema({
+  name: String,
+  number: String,
+})
+
+const Phone = mongoose.model('Phone', phoneSchema)
+
 morgan.token('body', req => {
   return JSON.stringify(req.body);
   // https://stackoverflow.com/questions/67496399/how-to-get-the-request-body-in-morgan-middleware
@@ -10,31 +26,33 @@ morgan.token('body', req => {
 
 app.use(morgan(':method :url :body'));
 
-let persons = [
-    { 
-      "id": 1,
-      "name": "Arto Hellas", 
-      "number": "040-123456"
-    },
-    { 
-      "id": 2,
-      "name": "Ada Lovelace", 
-      "number": "39-44-5323523"
-    },
-    { 
-      "id": 3,
-      "name": "Dan Abramov", 
-      "number": "12-43-234345"
-    },
-    { 
-      "id": 4,
-      "name": "Mary Poppendieck", 
-      "number": "39-23-6423122"
-    }
-];
+// let persons = [
+//     { 
+//       "id": 1,
+//       "name": "Arto Hellas", 
+//       "number": "040-123456"
+//     },
+//     { 
+//       "id": 2,
+//       "name": "Ada Lovelace", 
+//       "number": "39-44-5323523"
+//     },
+//     { 
+//       "id": 3,
+//       "name": "Dan Abramov", 
+//       "number": "12-43-234345"
+//     },
+//     { 
+//       "id": 4,
+//       "name": "Mary Poppendieck", 
+//       "number": "39-23-6423122"
+//     }
+// ];
 
 app.get('/api/persons', (req, res) => {
-    res.send(persons);
+  Phone.find({}).then(persons => {
+    res.json(persons)
+  })
 });
 
 const generateId = () => {
