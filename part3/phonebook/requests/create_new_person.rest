@@ -1,7 +1,7 @@
-POST http://localhost:3001/api/persons
+PUT http://localhost:3001/api/persons/
 Content-Type: application/json
 
 {
-    "name": "dotenv test test",
+    "name": "PUT TEST2",
     "number": "555-666"
 }

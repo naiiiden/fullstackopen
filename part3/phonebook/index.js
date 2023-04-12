@@ -47,6 +47,24 @@ app.get('/api/persons/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
+app.put('/api/persons/:id', (req, res, next) => {
+  const body = req.body;
+
+  const phone = {
+    name: body.name,
+    number: body.number,
+  }
+
+  Phone.findByIdAndUpdate(req.params.id, phone, { new: true })
+    .then(savedPhone => {
+      res.json(savedPhone);
+    })
+    .catch(err => next(err));
+    
+  // 3.17*: Phonebook database, step5
+  //can't wrap my head around this one so I used chatGPT :(
+});
+
 app.delete('/api/persons/:id', (req, res, next) => {
   Phone.findByIdAndDelete(req.params.id)
     .then(result => res.status(204).end)
