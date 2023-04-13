@@ -23,7 +23,7 @@ app.post('/api/persons', (req, res) => {
     
     if (body.number === undefined) {
         return res.status(404).json({ error: 'please add a number' });
-    }
+    } 
 
     const phone = new Phone({
         "name": body.name,
