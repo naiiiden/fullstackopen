@@ -1,4 +1,4 @@
-POST http://localhost:3002/api/notes
+POST http://localhost:3003/api/notes
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5haWRlbiIsImlkIjoiNjQzOTZhZDA4OWJmZDM4N2IyODBlNGVkIiwiaWF0IjoxNjgxNDg0NTExfQ.O84MQ0mMvR3sK7diWZN9RrHkTarwLp8qo4SkSOD8By8
 
