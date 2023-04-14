@@ -1,8 +1,0 @@
-POST http://localhost:3001/api/notes/
-Content-Type: application/json
-
-{
-    "content": "Full Stack Open User Administration Part 4",
-    "important": true,
-    "userId": "6438f8955d30965c4bebdd03"
-}
