@@ -134,9 +134,11 @@ const App = () => {
       <Notification message={errorMessage} />
 
       {!user && loginForm()} 
-      {user && <div>
-        <p>{user.name} logged in</p>
+      {user && 
+        <div>
+          <p>{user.name} logged in</p>
           {noteForm()}
+          <button onClick={() => (window.localStorage.removeItem('loggedNoteAppUser'), setUser(null))}>logout</button>
         </div>
       } 
  
