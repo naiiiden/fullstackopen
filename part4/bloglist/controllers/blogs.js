@@ -17,6 +17,23 @@ blogsRouter.post('/', (req, res) => {
         })
 })
 
+blogsRouter.put('/:id', (req, res, next) => {
+  const body = req.body
+
+  const blog = {
+    title: body.title,
+    author: body.author,
+    url: body.url,
+    likes: body.likes
+  }
+
+  Blog.findByIdAndUpdate(req.params.id, blog, { new: true })
+    .then(updatedBlog => {
+      res.json(updatedBlog)
+    })
+    .catch(err => next(err))
+})
+
 blogsRouter.delete('/:id', (req, res, next) => {
   Blog.findByIdAndRemove(req.params.id)
     .then(result => {

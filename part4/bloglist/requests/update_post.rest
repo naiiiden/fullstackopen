@@ -1,0 +1,8 @@
+PUT http://localhost:3003/api/blogs/64379b09593ae0eb0de20f32
+Content-Type: application/json
+
+{
+    "title": "Hello darkness",
+    "author": "Simon & Garfunkel"
+    
+}
