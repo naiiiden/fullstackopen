@@ -2,9 +2,8 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "trying to create a new blog",
-    "author": "i think author is useless now and should be deleted",
-    "url": "https://fullstackopen.com/en/part5/login_in_frontend#handling-login",
+    "title": "TEST TEST",
+    "url": "https://www.google.com",
     "likes": 0,
-    "userId": "643bae983e7669ecabe11a3c"
+    "userId": "643bad7df69f44190740b3b1"
 }
