@@ -1,9 +1,9 @@
 POST http://localhost:3003/api/blogs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im5hbm8iLCJpZCI6IjY0M2JhZDdkZjY5ZjQ0MTkwNzQwYjNiMSIsImlhdCI6MTY4MTY0ODUwOH0.h-1LyIV30dhY1Ie8EBiYq4xYpxgep6nSLUsECn02v00
 
 {
-    "title": "TEST TEST",
+    "title": "Hello friend",
     "url": "https://www.google.com",
-    "likes": 0,
-    "userId": "643bad7df69f44190740b3b1"
+    "likes": 0
 }
