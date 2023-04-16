@@ -2,8 +2,9 @@ POST http://localhost:3003/api/blogs
 Content-Type: application/json
 
 {
-    "title": "Homework",
-    "author": "Pepepopo",
+    "title": "trying to create a new blog",
+    "author": "i think author is useless now and should be deleted",
     "url": "https://fullstackopen.com/en/part5/login_in_frontend#handling-login",
-    "likes": 0
+    "likes": 0,
+    "userId": "643bae983e7669ecabe11a3c"
 }
