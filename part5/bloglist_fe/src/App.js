@@ -26,6 +26,7 @@ const App = () => {
         username, password,
       })
       setUser(user)
+      console.log(user)
       setUsername('')
       setPassword('')
     } catch (exception) {
@@ -82,9 +83,11 @@ const App = () => {
   return (
     <div>
       <h1>blogs</h1>
-      {user === null 
-        ? loginForm() 
-        : noteForm()
+      {!user && loginForm()} 
+      {user && <div>
+          <p>Logged in as {user.username}</p>
+            {noteForm()}
+        </div>
       }
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
