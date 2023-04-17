@@ -99,6 +99,7 @@ const App = () => {
       {!user && loginForm()} 
       {user && <div>
           <p>Logged in as {user.username}</p>
+            <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
             {blogForm()}
             {blogs.map(blog =>
               <Blog key={blog.id} blog={blog} />
