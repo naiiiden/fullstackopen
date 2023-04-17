@@ -17,6 +17,15 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogListAppUser')
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
   const handleLogin = async (e) => {
     e.preventDefault()
     console.log('logging in with', username, password)
@@ -25,6 +34,10 @@ const App = () => {
       const user = await loginService.login({
         username, password,
       })
+
+      window.localStorage.setItem('loggedBlogListAppUser', JSON.stringify(user))
+      console.log(window.localStorage)
+      blogService.setToken(user.token)
       setUser(user)
       console.log(user)
       setUsername('')
