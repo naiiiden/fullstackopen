@@ -98,11 +98,24 @@ const App = () => {
 
   const blogForm = () => (
     <form onSubmit={addBlog}>
+      <br/>
+      blog title:
+      <br/>
       <input
         value={newBlog}
         onChange={handleBlogChange}
       />
-      <button type="submit">save</button>
+      <br/>
+      <br/>
+      url:
+      <br/>
+      <input
+        value={newBlog}
+        onChange={handleBlogChange}
+      />
+      <br/>
+      <br/>
+      <button type="submit">add new blog</button>
     </form>  
   )
 
@@ -115,7 +128,7 @@ const App = () => {
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
             {blogForm()}
             {blogs.map(blog =>
-              <Blog key={blog.id} blog={blog} />
+              <Blog key={blog._id} blog={blog} />
             )}
         </div>
       }
