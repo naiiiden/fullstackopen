@@ -75,12 +75,25 @@ const App = () => {
   )
 
   const addBlog = (e) => {
+    e.preventDefault()
+    const blogObject = {
+      title: 'asd',
+      url: '',
+      author: '',
+    }
 
+    blogService
+      .create(blogObject)
+        .then(returnedBlog => {
+        setBlogs(blogs.concat(returnedBlog))
+        setNewBlog('')
+      })
   }
 
   const handleBlogChange = (e) => {
     console.log(newBlog)
     setNewBlog(e.target.value)
+    console.log(blogs)
   }
 
   const blogForm = () => (
