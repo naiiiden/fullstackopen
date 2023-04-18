@@ -22,14 +22,14 @@ const BlogForm = ({ createBlog }) => {
     const handleBlogTitle = (e) => {
         setBlogTitle(e.target.value)
         console.log(blogTitle)
-      }
+    }
     
-      const handleBlogUrl = (e) => {
+    const handleBlogUrl = (e) => {
         setBlogUrl(e.target.value)
         console.log(blogUrl)
-      }
+    }
     
-      const handleBlogAuthor = (e) => {
+    const handleBlogAuthor = (e) => {
         setBlogAuthor(e.target.value)
         console.log(blogAuthor)
     }

@@ -19,29 +19,37 @@ const getTokenFrom = req => {
   return null
 }
   
-blogsRouter.post('/', async (req, res) => {
-    const body = req.body
+blogsRouter.post('/', async (req, res, next) => {
+  const body = req.body
 
-    const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
-    if (!decodedToken.id) {
-      return res.status(401).json({ error: 'token invalid' })
-    }
+  const decodedToken = jwt.verify(getTokenFrom(req), process.env.SECRET)
+  if (!decodedToken.id) {
+    return res.status(401).json({ error: 'token invalid' })
+  }
 
-    const user = await User.findById(decodedToken.id)
+  const user = await User.findById(decodedToken.id)
 
-    const blog = new Blog({
-      title: body.title,
-      url: body.url,
-      author: body.author,
-      likes: body.likes,
-      user: user.id
-    })
+  const blog = new Blog({
+    title: body.title,
+    url: body.url,
+    author: body.author,
+    likes: body.likes,
+    user: user.id
+  })
 
+  try {
     const savedBlog = await blog.save()
+
     user.blogs = user.blogs.concat(savedBlog._id)
     await user.save()
 
-    res.json(savedBlog)
+    const populatedBlog = await Blog.findById(savedBlog._id)
+      .populate('user', { username: 1, name: 1 })
+
+    res.json(populatedBlog)
+  } catch (error) {
+    next(error)
+  }
 })
 
 blogsRouter.put('/:id', (req, res, next) => {
@@ -49,7 +57,7 @@ blogsRouter.put('/:id', (req, res, next) => {
 
   const blog = {
     title: body.title,
-    /* author: body.author, */
+    author: body.author, 
     url: body.url,
     likes: body.likes
   }
