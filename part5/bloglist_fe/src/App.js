@@ -15,6 +15,8 @@ const App = () => {
 
   const blogFormRef = useRef()
 
+  console.log(blogs)
+
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs( blogs )
