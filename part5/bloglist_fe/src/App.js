@@ -121,6 +121,12 @@ const App = () => {
       .create(blogObject)
         .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
+        setErrorMessage(
+          `Blog '${returnedBlog.title}' has been added`
+        )
+        setTimeout(() => {
+          setErrorMessage(null)
+        }, 5000)
         setBlogTitle('')
         setBlogUrl('')
         setBlogAuthor('')
