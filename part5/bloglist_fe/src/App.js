@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
@@ -15,6 +15,8 @@ const App = () => {
   const [blogTitle, setBlogTitle] = useState('')
   const [blogUrl, setBlogUrl] = useState('')
   const [blogAuthor, setBlogAuthor] = useState('')
+
+  const blogFormRef = useRef()
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -117,9 +119,10 @@ const App = () => {
       url: blogUrl,
       author: blogAuthor,
     }
-
+    
+    blogFormRef.current.toggleVisibility()
     blogService
-      .create(blogObject)
+    .create(blogObject)
         .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
         setErrorMessage(
@@ -156,7 +159,7 @@ const App = () => {
       {!user && loginForm()} 
       {user && <div>
           <p>Logged in as {user.username}</p>
-            <Togglable buttonLabel="new note">
+            <Togglable buttonLabel="new note" ref={blogFormRef}>
               {blogForm()}
             </Togglable>
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
