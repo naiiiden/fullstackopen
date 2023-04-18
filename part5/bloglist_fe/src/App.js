@@ -13,6 +13,7 @@ const App = () => {
   const [newBlog, setNewBlog] = useState('')
   const [blogTitle, setBlogTitle] = useState('')
   const [blogUrl, setBlogUrl] = useState('')
+  const [blogAuthor, setBlogAuthor] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -96,6 +97,13 @@ const App = () => {
       />
       <br/>
       <br/>
+      author:
+      <br/>
+      <input
+        onChange={handleBlogAuthor}
+      />
+      <br/>
+      <br/>
       <button type="submit">add new blog</button>
     </form>  
   )
@@ -105,7 +113,7 @@ const App = () => {
     const blogObject = {
       title: blogTitle,
       url: blogUrl,
-      author: user.username,
+      author: blogAuthor,
     }
 
     blogService
@@ -126,6 +134,11 @@ const App = () => {
     console.log(blogUrl)
   }
 
+  const handleBlogAuthor = (e) => {
+    setBlogAuthor(e.target.value)
+    console.log(blogAuthor)
+  }
+
   return (
     <div>
       <h1>blogs</h1>
@@ -134,9 +147,11 @@ const App = () => {
           <p>Logged in as {user.username}</p>
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
             {blogForm()}
-            {blogs.map(blog =>
-              <Blog key={blog._id} blog={blog} />
-            )}
+            <div style={{display: "flex", gap: "1rem", flexWrap: "wrap"}}>
+              {blogs.map(blog =>
+                <Blog key={blog._id} blog={blog} />
+              )}
+            </div>
         </div>
       }
     </div>
