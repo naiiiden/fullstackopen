@@ -104,7 +104,7 @@ const App = () => {
               <BlogForm createBlog={addBlog}/>
             </Togglable>
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
-            <div style={{display: "flex", gap: "1rem", flexWrap: "wrap"}}>
+            <div>
               {blogs.map(blog =>
                 <Blog key={blog._id} blog={blog} />
               )}
