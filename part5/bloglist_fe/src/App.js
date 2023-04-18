@@ -4,6 +4,7 @@ import blogService from './services/blogs'
 import loginService from './services/login'
 import Notification from './components/Notification'
 import Togglable from './components/Togglable'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -11,10 +12,6 @@ const App = () => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
-  
-  const [blogTitle, setBlogTitle] = useState('')
-  const [blogUrl, setBlogUrl] = useState('')
-  const [blogAuthor, setBlogAuthor] = useState('')
 
   const blogFormRef = useRef()
 
@@ -80,76 +77,20 @@ const App = () => {
       <button type="submit">login</button>
     </form>      
   )
-  
-  const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <br/>
-      blog title:
-      <br/>
-      <input
-        value={blogTitle}
-        onChange={handleBlogTitle}
-      />
-      <br/>
-      <br/>
-      url:
-      <br/>
-      <input
-        value={blogUrl}
-        onChange={handleBlogUrl}
-      />
-      <br/>
-      <br/>
-      author:
-      <br/>
-      <input
-        value={blogAuthor}
-        onChange={handleBlogAuthor}
-      />
-      <br/>
-      <br/>
-      <button type="submit">add new blog</button>
-    </form>  
-  )
 
-  const addBlog = (e) => {
-    e.preventDefault()
-    const blogObject = {
-      title: blogTitle,
-      url: blogUrl,
-      author: blogAuthor,
-    }
-    
-    blogFormRef.current.toggleVisibility()
+  const addBlog = (blogObject) => {
     blogService
     .create(blogObject)
-        .then(returnedBlog => {
-        setBlogs(blogs.concat(returnedBlog))
+    .then(returnedBlog => {
+      setBlogs(blogs.concat(returnedBlog))
+      blogFormRef.current.toggleVisibility()
         setErrorMessage(
           `Blog '${returnedBlog.title}' has been added`
         )
         setTimeout(() => {
           setErrorMessage(null)
         }, 5000)
-        setBlogTitle('')
-        setBlogUrl('')
-        setBlogAuthor('')
       })
-  }
-
-  const handleBlogTitle = (e) => {
-    setBlogTitle(e.target.value)
-    console.log(blogTitle)
-  }
-
-  const handleBlogUrl = (e) => {
-    setBlogUrl(e.target.value)
-    console.log(blogUrl)
-  }
-
-  const handleBlogAuthor = (e) => {
-    setBlogAuthor(e.target.value)
-    console.log(blogAuthor)
   }
 
   return (
@@ -160,7 +101,7 @@ const App = () => {
       {user && <div>
           <p>Logged in as {user.username}</p>
             <Togglable buttonLabel="new note" ref={blogFormRef}>
-              {blogForm()}
+              <BlogForm createBlog={addBlog}/>
             </Togglable>
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
             <div style={{display: "flex", gap: "1rem", flexWrap: "wrap"}}>
