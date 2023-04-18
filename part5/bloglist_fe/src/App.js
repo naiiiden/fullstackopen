@@ -95,6 +95,8 @@ const App = () => {
       })
   }
 
+  const blogsDescendingList = blogs.sort((a, b) => b.likes - a.likes)
+
   return (
     <div>
       <h1>blogs</h1>
@@ -107,9 +109,9 @@ const App = () => {
             </Togglable>
             <button onClick={() => (window.localStorage.removeItem('loggedBlogListAppUser'), setUser(null))}>logout</button>
             <div style={{display: "flex", flexWrap: "wrap"}}>
-              {blogs.map(blog =>
-                <Blog key={blog._id} blog={blog} />
-              )}
+              {blogsDescendingList.map(blog => {
+                return <Blog key={blog._id} blog={blog} />
+              })}
             </div>
         </div>
       }
