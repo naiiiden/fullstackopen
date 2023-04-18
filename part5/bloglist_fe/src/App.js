@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import Notification from './components/Notification'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -10,7 +11,6 @@ const App = () => {
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
   
-  const [newBlog, setNewBlog] = useState('')
   const [blogTitle, setBlogTitle] = useState('')
   const [blogUrl, setBlogUrl] = useState('')
   const [blogAuthor, setBlogAuthor] = useState('')
@@ -84,7 +84,7 @@ const App = () => {
       blog title:
       <br/>
       <input
-        // value={newBlog}
+        value={blogTitle}
         onChange={handleBlogTitle}
       />
       <br/>
@@ -92,7 +92,7 @@ const App = () => {
       url:
       <br/>
       <input
-        // value={newBlog}
+        value={blogUrl}
         onChange={handleBlogUrl}
       />
       <br/>
@@ -100,6 +100,7 @@ const App = () => {
       author:
       <br/>
       <input
+        value={blogAuthor}
         onChange={handleBlogAuthor}
       />
       <br/>
@@ -120,7 +121,9 @@ const App = () => {
       .create(blogObject)
         .then(returnedBlog => {
         setBlogs(blogs.concat(returnedBlog))
-        setNewBlog('')
+        setBlogTitle('')
+        setBlogUrl('')
+        setBlogAuthor('')
       })
   }
 
@@ -142,6 +145,7 @@ const App = () => {
   return (
     <div>
       <h1>blogs</h1>
+      <Notification message={errorMessage} />
       {!user && loginForm()} 
       {user && <div>
           <p>Logged in as {user.username}</p>
