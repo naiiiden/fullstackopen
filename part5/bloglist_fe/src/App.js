@@ -5,11 +5,14 @@ import loginService from './services/login'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-  const [newBlog, setNewBlog] = useState('')
   const [errorMessage, setErrorMessage] = useState(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [user, setUser] = useState(null)
+  
+  const [newBlog, setNewBlog] = useState('')
+  const [blogTitle, setBlogTitle] = useState('')
+  const [blogUrl, setBlogUrl] = useState('')
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -73,13 +76,36 @@ const App = () => {
       <button type="submit">login</button>
     </form>      
   )
+  
+  const blogForm = () => (
+    <form onSubmit={addBlog}>
+      <br/>
+      blog title:
+      <br/>
+      <input
+        // value={newBlog}
+        onChange={handleBlogTitle}
+      />
+      <br/>
+      <br/>
+      url:
+      <br/>
+      <input
+        // value={newBlog}
+        onChange={handleBlogUrl}
+      />
+      <br/>
+      <br/>
+      <button type="submit">add new blog</button>
+    </form>  
+  )
 
   const addBlog = (e) => {
     e.preventDefault()
     const blogObject = {
-      title: 'asd',
-      url: '',
-      author: '',
+      title: blogTitle,
+      url: blogUrl,
+      author: user.username,
     }
 
     blogService
@@ -90,34 +116,15 @@ const App = () => {
       })
   }
 
-  const handleBlogChange = (e) => {
-    console.log(newBlog)
-    setNewBlog(e.target.value)
-    console.log(blogs)
+  const handleBlogTitle = (e) => {
+    setBlogTitle(e.target.value)
+    console.log(blogTitle)
   }
 
-  const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <br/>
-      blog title:
-      <br/>
-      <input
-        value={newBlog}
-        onChange={handleBlogChange}
-      />
-      <br/>
-      <br/>
-      url:
-      <br/>
-      <input
-        value={newBlog}
-        onChange={handleBlogChange}
-      />
-      <br/>
-      <br/>
-      <button type="submit">add new blog</button>
-    </form>  
-  )
+  const handleBlogUrl = (e) => {
+    setBlogUrl(e.target.value)
+    console.log(blogUrl)
+  }
 
   return (
     <div>
