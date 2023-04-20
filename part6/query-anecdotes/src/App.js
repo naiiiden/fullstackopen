@@ -1,11 +1,28 @@
 import AnecdoteForm from './components/AnecdoteForm'
 import Notification from './components/Notification'
-import { useQuery } from 'react-query'
-import { getAnecdotes } from './requests'
+import { useQuery, useMutation, useQueryClient } from 'react-query'
+import { createAnecdote, getAnecdotes } from './requests'
 
 const App = () => {
+  const queryClient = useQueryClient()
+
   const result = useQuery('anecdotes', getAnecdotes)
   
+  const newAnecdoteMutation = useMutation(createAnecdote, {
+    onSuccess: (newAnecdote) => {
+      const anecdotes = queryClient.getQueryData('anecdotes')
+      queryClient.setQueryData('anecdotes', anecdotes.concat(newAnecdote))
+    }
+  })
+
+  const addAnecdote = async (e) => {
+    e.preventDefault()
+    const content = e.target.anecdote.value
+    console.log(content)
+    e.target.anecdote.value = ''
+    newAnecdoteMutation.mutate({ content, votes: 0 })
+  }
+
   if ( result.isLoading ) {
     return <div>loading data...</div>
   }
@@ -15,7 +32,10 @@ const App = () => {
   return (
     <div>
       <h3>Anecdote app</h3>
-    
+      <form onSubmit={addAnecdote}>
+        <input name='anecdote' />
+        <button type="submit">create</button>
+      </form>
       <Notification />
       <AnecdoteForm />
       {anecdotes?.map(anecdote =>
