@@ -23,6 +23,9 @@ const AnecdoteForm = ({ type }) => {
     const content = e.target.anecdote.value
     console.log('addAnecdote', content)
     dispatch({type: 'ADD', message: `New anecdote "${content}" added`})
+    setTimeout(() => {
+      dispatch({type: 'ADD', message: null})
+    }, 5000)
     e.target.anecdote.value = ''
     newAnecdoteMutation.mutate({ content, votes: 0 })
   }

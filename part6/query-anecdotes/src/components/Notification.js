@@ -10,6 +10,9 @@ const Notification = () => {
 
   const message = useNotificationValue()
   
+  if (message === null) {
+    return null
+  }
   return <div style={style}>{message}</div>
   
 }
