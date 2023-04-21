@@ -10,6 +10,10 @@ const AnecdoteForm = () => {
     onSuccess: (newAnecdote) => {
       queryClient.invalidateQueries('anecdotes')
       queryClient.setQueryData('anecdotes', anecdotes.concat(newAnecdote))
+    },
+    onError: (error) => {
+      console.log(5, error)
+      dispatch({type: 'ADD', message: error.response.data.error})
     }
   })
 
