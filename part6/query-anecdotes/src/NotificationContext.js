@@ -1,12 +1,9 @@
 import { createContext, useReducer, useContext } from "react";
 
 const notificationReducer = (state, action) => {
-    console.log(1,'reducer state', state)
-    console.log(2, 'reducer action', action)
-
     switch(action.type) {
         case 'ADD': return action.message
-        case 'VOTE': return state
+        case 'VOTE': return action.message
         default: return state
     }
 }
