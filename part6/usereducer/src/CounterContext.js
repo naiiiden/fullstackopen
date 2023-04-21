@@ -30,5 +30,3 @@ export const CounterContextProvider = (props) => {
         </CounterContext.Provider>
     )
 }
-
-export default CounterContext
