@@ -39,7 +39,7 @@ const App = () => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => handleVoteAnecdote(anecdote)}>vote</button>
+            <button onClick={() => (handleVoteAnecdote(anecdote), console.log(1))}>vote</button>
           </div>
         </div>
       )}
