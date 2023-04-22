@@ -1,6 +1,7 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, useMatch, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useMatch, useNavigate } from 'react-router-dom';
 import { useField } from './hooks/useField';
+import styled from 'styled-components'
 
 const Menu = () => {
   const padding = {
@@ -15,15 +16,22 @@ const Menu = () => {
   )
 }
 
+const AnecdoteLink = styled(Link)`
+  background: red;
+  display: inline-block;
+  padding: .5rem 1rem;
+  margin: .25rem 0;
+`
+
 const AnecdoteList = ({ anecdotes }) => (
   <div>
     <h2>Anecdotes</h2>
     <ul>
       {anecdotes.map(anecdote => 
         <li key={anecdote.id} >
-          <Link to={`/anecdotes/${anecdote.id}`}>
+          <AnecdoteLink to={`/anecdotes/${anecdote.id}`}>
             {anecdote.content}
-          </Link>
+          </AnecdoteLink>
         </li>
       )}
     </ul>
