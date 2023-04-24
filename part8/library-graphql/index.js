@@ -106,12 +106,16 @@ const typeDefs = `
   }
 
   type Mutation {
-    addBook(
+    addBook (
       title: String!,
       author: String!,
       published: Int!,
       genres: [String!]!
     ): Book
+    editAuthor (
+      name: String!
+      born: Int!
+    ): Author
   }
 `
 
@@ -162,6 +166,16 @@ const resolvers = {
       }
 
       return book
+    },
+    editAuthor: (root, args) => {
+      const author = authors.find(author => author.name === args.name)
+        if (!author) {
+          return null
+        }
+
+        const updatedAuthor = { ...author, born: args.born }
+        authors = authors.map(author => author.name === args.name ? updatedAuthor : author)
+        return updatedAuthor
     }
   }
 }
