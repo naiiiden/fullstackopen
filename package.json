@@ -1,5 +1,9 @@
 {
   "dependencies": {
     "mongoose-unique-validator": "^4.0.0"
+  },
+  "devDependencies": {
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
   }
 }
