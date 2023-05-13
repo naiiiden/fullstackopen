@@ -1,6 +1,8 @@
-const Content = () => {
+const Content = ({ name, exerciseCount }: { name: string, exerciseCount: number}) => {
     return (
-        <div>c</div>
+        <p>
+            {name} {exerciseCount}
+        </p>
     )
 }
 
