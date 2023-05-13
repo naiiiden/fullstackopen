@@ -1,6 +1,9 @@
-const Total = () => {
+const Total = ({ totalExercises }: { totalExercises: number }) => {    
     return (
-        <div>t</div>
+        <p>
+            Number of exercises{" "}
+            {totalExercises}
+        </p>
     )
 }
 
