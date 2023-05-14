@@ -1,14 +1,17 @@
-import Part from "./Part"
+import { CoursePart } from "../App";
+import Part from "./Part";
 
-const Content = ({ name, exerciseCount, info }: { name: string, exerciseCount: number, info: string }) => {
-    return (
-        <div>
-            <p>
-                <strong>{name} {exerciseCount}</strong>
-            </p>
-            <Part info={info}/>
+const Content = ({ parts }: { parts: CoursePart[] }) => {
+  return (
+    <div>
+      {parts.map((part, index) => (
+        <div key={index}>
+            <h2>{part.name} {part.exerciseCount}</h2>
+            <Part part={part} />
         </div>
-    )
-}
+      ))}
+    </div>
+  );
+};
 
-export default Content
+export default Content;

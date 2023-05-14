@@ -31,7 +31,7 @@ interface CoursePartSpecial extends CoursePartBase, CoursePartDescription {
   kind: 'special'
 }
 
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground | CoursePartSpecial
+export type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground | CoursePartSpecial
 
 const App = () => {
   const courseName = "Half Stack application development";
@@ -80,44 +80,11 @@ const App = () => {
     return sum + part.exerciseCount;
   }, 0);
 
-  const courseinfo = courseParts.map((part, i) => {
-    switch (part.kind) {
-      case 'basic': 
-        return <Content 
-                key={i}
-                name={part.name} 
-                exerciseCount={part.exerciseCount}
-                info={`${[part.name, part.description].join(' ')}`}  
-              />
-      case 'group': 
-        return <Content 
-                key={i}
-                name={part.name} 
-                exerciseCount={part.exerciseCount}
-                info={`${[part.name, part.groupProjectCount].join(' ')}`}  
-              />
-      case 'background': 
-        return <Content
-                key={i} 
-                name={part.name} 
-                exerciseCount={part.exerciseCount}
-                info={`${[part.name, part.description, part.backgroundMaterial].join(' ')}`}  
-              />
-      case 'special':
-        return <Content 
-                key={i} 
-                name={part.name} 
-                exerciseCount={part.exerciseCount}
-                info={`${[part.name, part.description, 'required skills: ', part.requirements.join(' ')].join(' ')}`}  
-              />
-    }
-  })
-
   return (
     <div>
       <Header courseName={courseName}/>
       <main>        
-        {courseinfo}
+        <Content parts={courseParts}/>
         <Total totalExercises={total}/>
       </main>
     </div>
