@@ -26,7 +26,12 @@ interface CoursePartBackground extends CoursePartBase, CoursePartDescription {
   kind: 'background'
 }
 
-type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground
+interface CoursePartSpecial extends CoursePartBase, CoursePartDescription {
+  requirements: string[]
+  kind: 'special'
+}
+
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackground | CoursePartSpecial
 
 const App = () => {
   const courseName = "Half Stack application development";
@@ -56,6 +61,13 @@ const App = () => {
       backgroundMaterial: "https://type-level-typescript.com/template-literal-types",
       kind: "background"
     },
+    {
+      name: "Backend development",
+      exerciseCount: 21,
+      description: "Typing the backend",
+      requirements: ["nodejs", "jest"],
+      kind: "special"
+    }
   ]
 
   const total = courseParts.reduce((sum, part) => {
