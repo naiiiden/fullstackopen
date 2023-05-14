@@ -84,19 +84,26 @@ const App = () => {
                 info={`${[part.name, part.description].join(' ')}`}  
               />
       case 'group': 
-      return <Content 
-              key={i}
-              name={courseParts[1].name} 
-              exerciseCount={courseParts[1].exerciseCount}
-              info={`${[part.name, part.groupProjectCount].join(' ')}`}  
-            />
+        return <Content 
+                key={i}
+                name={courseParts[1].name} 
+                exerciseCount={courseParts[1].exerciseCount}
+                info={`${[part.name, part.groupProjectCount].join(' ')}`}  
+              />
       case 'background': 
-      return <Content
-              key={i} 
-              name={courseParts[2].name} 
-              exerciseCount={courseParts[2].exerciseCount}
-              info={`${[part.name, part.backgroundMaterial].join(' ')}`}  
-            />
+        return <Content
+                key={i} 
+                name={courseParts[2].name} 
+                exerciseCount={courseParts[2].exerciseCount}
+                info={`${[part.name, part.description, part.backgroundMaterial].join(' ')}`}  
+              />
+      case 'special':
+        return <Content 
+                key={i} 
+                name={courseParts[3].name} 
+                exerciseCount={courseParts[3].exerciseCount}
+                info={`${[part.name, part.description, 'required skills: ', part.requirements.join(' ')].join(' ')}`}  
+              />
     }
   })
 
