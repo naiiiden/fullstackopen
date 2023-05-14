@@ -1,4 +1,4 @@
-const Part = ({info}: {info: string}) => {
+const Part = ({ info }: {info: string}) => {
     return (
         <p>{info}</p>
     )

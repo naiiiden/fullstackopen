@@ -62,6 +62,12 @@ const App = () => {
       kind: "background"
     },
     {
+      name: "TypeScript in frontend",
+      exerciseCount: 10,
+      description: "a hard part",
+      kind: "basic",
+    },
+    {
       name: "Backend development",
       exerciseCount: 21,
       description: "Typing the backend",
@@ -79,29 +85,29 @@ const App = () => {
       case 'basic': 
         return <Content 
                 key={i}
-                name={courseParts[0].name} 
-                exerciseCount={courseParts[0].exerciseCount}
+                name={part.name} 
+                exerciseCount={part.exerciseCount}
                 info={`${[part.name, part.description].join(' ')}`}  
               />
       case 'group': 
         return <Content 
                 key={i}
-                name={courseParts[1].name} 
-                exerciseCount={courseParts[1].exerciseCount}
+                name={part.name} 
+                exerciseCount={part.exerciseCount}
                 info={`${[part.name, part.groupProjectCount].join(' ')}`}  
               />
       case 'background': 
         return <Content
                 key={i} 
-                name={courseParts[2].name} 
-                exerciseCount={courseParts[2].exerciseCount}
+                name={part.name} 
+                exerciseCount={part.exerciseCount}
                 info={`${[part.name, part.description, part.backgroundMaterial].join(' ')}`}  
               />
       case 'special':
         return <Content 
                 key={i} 
-                name={courseParts[3].name} 
-                exerciseCount={courseParts[3].exerciseCount}
+                name={part.name} 
+                exerciseCount={part.exerciseCount}
                 info={`${[part.name, part.description, 'required skills: ', part.requirements.join(' ')].join(' ')}`}  
               />
     }
