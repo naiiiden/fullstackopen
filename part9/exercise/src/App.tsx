@@ -62,13 +62,37 @@ const App = () => {
     return sum + part.exerciseCount;
   }, 0);
 
+  const courseinfo = courseParts.map((part, i) => {
+    switch (part.kind) {
+      case 'basic': 
+        return <Content 
+                key={i}
+                name={courseParts[0].name} 
+                exerciseCount={courseParts[0].exerciseCount}
+                info={`${[part.name, part.description].join(' ')}`}  
+              />
+      case 'group': 
+      return <Content 
+              key={i}
+              name={courseParts[1].name} 
+              exerciseCount={courseParts[1].exerciseCount}
+              info={`${[part.name, part.groupProjectCount].join(' ')}`}  
+            />
+      case 'background': 
+      return <Content
+              key={i} 
+              name={courseParts[2].name} 
+              exerciseCount={courseParts[2].exerciseCount}
+              info={`${[part.name, part.backgroundMaterial].join(' ')}`}  
+            />
+    }
+  })
+
   return (
     <div>
       <Header courseName={courseName}/>
-      <main>
-        <Content name={courseParts[0].name} exerciseCount={courseParts[0].exerciseCount}/>
-        <Content name={courseParts[1].name} exerciseCount={courseParts[1].exerciseCount}/>
-        <Content name={courseParts[2].name} exerciseCount={courseParts[2].exerciseCount}/>
+      <main>        
+        {courseinfo}
         <Total totalExercises={total}/>
       </main>
     </div>
