@@ -2,13 +2,17 @@ import Content from "./components/Content";
 import Header from "./components/Header";
 import Total from "./components/Total";
 
+
 interface CoursePartBase {
   name: string
   exerciseCount: number
 }
 
-interface CoursePartBasic extends CoursePartBase {
+interface CoursePartDescription extends CoursePartBase {
   description: string
+}
+
+interface CoursePartBasic extends CoursePartBase, CoursePartDescription {
   kind: 'basic'
 }
 
@@ -17,8 +21,7 @@ interface CoursePartGroup extends CoursePartBase {
   kind: 'group' 
 }
 
-interface CoursePartBackground extends CoursePartBase {
-  description: string
+interface CoursePartBackground extends CoursePartBase, CoursePartDescription {
   backgroundMaterial: string
   kind: 'background'
 }
